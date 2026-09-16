@@ -43,10 +43,16 @@ if [ ! -f "$ENV_FILE" ]; then
     if [ -f "$ENV_EXAMPLE" ]; then
         cp "$ENV_EXAMPLE" "$ENV_FILE"
         echo ""
-        echo "[!] 已生成 .env 文件，请填写以下必填项后重新运行："
-        echo "    OCI_INSTANCE_ID=<你的实例 OCID>"
+        echo "[!] 已生成 .env 文件，请先填写必填项 OCI_INSTANCE_ID："
+        echo "    文件路径: $(pwd)/$ENV_FILE"
         echo ""
-        exit 0
+        # 尝试用编辑器打开，失败则等待用户手动编辑后按回车继续
+        if command -v "${EDITOR:-vi}" &>/dev/null; then
+            "${EDITOR:-vi}" "$ENV_FILE"
+        else
+            echo "[*] 请编辑 $ENV_FILE 填写 OCI_INSTANCE_ID，完成后按回车继续..."
+            read -r
+        fi
     else
         echo "[-] 缺少 .env.example，无法初始化配置。"
         exit 1

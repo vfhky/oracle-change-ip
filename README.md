@@ -22,16 +22,12 @@ Oracle OCI 公网 IP 自动轮换工具。当检测到当前公网 IP 在中国�
 
 ```bash
 # 克隆仓库
-git clone https://github.com/<your-username>/oracle-change-ip.git
+git clone https://github.com/vfhky/oracle-change-ip.git
 cd oracle-change-ip
 
-# 首次运行：自动创建虚拟环境、安装依赖，并生成 .env 模板
-./run.sh
-
-# 编辑 .env，填写你的实例 OCID
-vi .env
-
-# 再次运行即开始检测并按需轮换
+# 一键运行：自动创建虚拟环境、安装依赖
+# 首次运行若无 .env 文件，会自动生成并打开编辑器引导填写 OCI_INSTANCE_ID
+# 保存退出编辑器后直接继续执行，无需重复运行
 ./run.sh
 
 # 模拟运行（不执行任何 OCI 写操作）
