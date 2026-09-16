@@ -29,6 +29,20 @@ region=us-phoenix-1
 key_file=~/.oci/your_private_key.pem
 ```
 
+私钥文件权限必须设置为仅所有者可读，否则 OCI SDK 会拒绝加载：
+
+```bash
+chmod 600 ~/.oci/your_private_key.pem
+chmod 600 ~/.oci/config
+```
+
+**获取 OCI 认证配置的步骤：**
+
+1. 登录 [OCI 控制台](https://cloud.oracle.com) → 右上角头像 → **My profile**
+2. 左侧菜单 **API keys** → **Add API key** → 下载私钥（`.pem` 文件），保存到 `~/.oci/`
+3. 添加后页面会显示完整的 `config` 文件内容，直接复制粘贴到 `~/.oci/config`
+4. 参考官方文档：[Required Keys and OCIDs](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm) · [SDK Configuration File](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm)
+
 > **说明**：`~/.oci/config` 是 OCI SDK 的**身份认证**配置（账号、密钥、地域），全局唯一；`.env` 是本工具的**业务参数**（要操作哪台实例、检测端口等），两者职责不同，都需要配置。
 
 ### 安装与运行
