@@ -16,7 +16,20 @@ Oracle OCI 公网 IP 自动轮换工具。当检测到当前公网 IP 在中国�
 ### 前置条件
 
 - Python 3.8+
-- OCI CLI 配置文件 `~/.oci/config`（参考 [OCI 官方文档](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm)）
+- OCI SDK 认证配置文件 `~/.oci/config`（负责"你是谁、有什么权限"，与 `.env` 无关）
+
+`~/.oci/config` 示例（通常由 `oci setup config` 或手动创建）：
+
+```ini
+[DEFAULT]
+user=ocid1.user.oc1..xxxxxx
+fingerprint=xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx
+tenancy=ocid1.tenancy.oc1..xxxxxx
+region=us-phoenix-1
+key_file=~/.oci/your_private_key.pem
+```
+
+> **说明**：`~/.oci/config` 是 OCI SDK 的**身份认证**配置（账号、密钥、地域），全局唯一；`.env` 是本工具的**业务参数**（要操作哪台实例、检测端口等），两者职责不同，都需要配置。
 
 ### 安装与运行
 
